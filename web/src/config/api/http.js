@@ -12,8 +12,12 @@ axios.interceptors.request.use((config) => {
   config.paramsSerializer = params => qs.stringify(params)
   // 在发送请求之前做些什么
   if (['post', 'put', 'patch'].indexOf(config.method) >= 0) {
-    config.data = qs.stringify(config.data)
-    config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+    if (config.type === 'upload') {
+      // config.headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundarymzt9ygbpxBBsYGBw'
+    } else {
+      config.data = qs.stringify(config.data)
+      config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+    }
   }
   return config
 }, (error) => {

@@ -13,6 +13,9 @@ html, body {
   min-width: 1200px;
   /*font-family: "微软雅黑", "宋体";*/
 }
+body::-webkit-scrollbar { width: 0 !important }
+body { -ms-overflow-style: none; }
+body { overflow: -moz-scrollbars-none; }
 
 table { 
   border-collapse:collapse; 
@@ -225,4 +228,18 @@ input,img {
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
+}
+
+.label_height {
+  line-height: 35px;
+}
+
+.callout-red {
+  color: #4786FF;
+}
+.callout {
+  color: #999;
+}
+.input-error{
+   border-color: red;
 }

@@ -1,4 +1,4 @@
-import { xhr } from '@/config/api/http'
+import { xhr, msg } from '@/config/api/http'
 
 // const apiSrv = process.env.NODE_ENV === 'development' ? '//dec.cpsdb61.com/' : '//dec.cpsdb.com/'
 const env = (() => {
@@ -19,6 +19,12 @@ const apiSrv = {
 export const DOMAIN = {
   test: 'cpsdb61.com',
   online: 'cpsdb.com',
+  local: location.hostname
+}[env]
+
+export const IMAGE_SERVER_URL = {
+  test: '//pic.cpsdb61.com/',
+  online: '//pic.cpsdb.com/',
   local: location.hostname
 }[env]
 
@@ -59,4 +65,57 @@ export const getNoticesListing = async () => {
 export const getNoticesCounts = async () => {
   const res = await xhr.get(`${apiSrv}publics/notices/newest/counts`)
   return res.data.data
+}
+
+/**
+ * @author 秦超
+ * @returns 获取地区树
+ */
+export const getAreaTree = async () => {
+  const res = await xhr.get(`${apiSrv}publics/area/tree`)
+  // 判断http状态码
+  if (res && [200, 304, 400].indexOf(res.status) > -1) {
+    if (!res.data.success) {
+      msg.error(res.data.message)
+    }
+  } else {
+    msg.error('网络异常')
+  }
+  return res.data.data || Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author 秦超
+ * @returns 获取手机验证码
+ */
+export const getValidatecode = async (type, cellphone) => {
+  const res = await xhr.get(`${apiSrv}publics/sms/${type}/${cellphone}`)
+  // 判断http状态码
+  if (res && [200, 304, 400].indexOf(res.status) > -1) {
+    if (res.data.message) {
+      msg.error(res.data.message)
+    }
+  } else {
+    msg.error('网络异常')
+  }
+  return res.data.data || Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author 秦超
+ * @returns 图片上传
+ */
+export const uploadFile = async (params) => {
+  const res = await xhr.post(`${apiSrv}publics/file/upload`, params, {
+    type: 'upload'
+  })
+  // 判断http状态码
+  if (res && [200, 304, 400].indexOf(res.status) > -1) {
+    if (res.data.message) {
+      msg.error(res.data.message)
+    }
+  } else {
+    msg.error('网络异常')
+  }
+  return res.data.data || Promise.reject(new Error(res.data.message))
 }

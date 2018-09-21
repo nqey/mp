@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="outer-container">
     <!-- 波浪特效开始 -->
     <div class="waveWrapper waveAnimation">
       <div class="waveWrapperInner bgTop">
@@ -62,18 +62,60 @@
       </div>
       <div class="row announcement">
         <div class="col-2">
-          <span class="glyphicon glyphicon-volume-up pull-left" style="color: #4e99ff; font-size: 14px; margin-right: 10px; margin-top: 2px;"></span> 系统公告
+          <span class="glyphicon glyphicon-volume-up pull-left" style=""></span> 系统公告
         </div>
         <router-link :to="'/sys/msg/detail/'+sysMsgId" class="col-8" style="color:#464646;">{{sysMsgTitle}}</router-link>
         <router-link to="/sys/msg/list" class="col-2 text-right" style="color: #01c853;">更多<span class="glyphicon glyphicon-menu-right" style="font-size: 12px;"></span></router-link>
       </div>
-      <div class="row"></div>
-      <div class="row footer"></div>
+      <div class="row">
+        <div class="col-4 see-detail">
+          <div class="logo sbxt">
+            <img :src="sbxt"/>
+          </div>
+          <h4>申报官</h4>
+          <p>申报官是中国商品诚信数据库授权依法筛选和推荐符合标准的生产企业，使其获得中国商品诚信数据库项目扶持资金补贴的申报人员，隶属于各申报机构，协助企业完善申报材料，须忠实执行中国商品诚信数据库的筛选标准，全心全意为消费者服务。</p>
+          <router-link to="/agency/1"><button class="btn ckxq">查看详情</button></router-link>
+        </div>
+        <div class="col-4 see-detail">
+          <div class="logo sjglzx">
+            <img :src="sjglzx"/>
+          </div>
+          <h4>申报服务处</h4>
+          <p>申报机构是中国商品诚信数据库授权设立的项目申报机构，隶属于中国商品诚信数据库服务中心，针对性的服务申报企业入库，管理该机构申报官工作；依法筛选和推荐符合标准的生产企业，使其获得中国商品诚信数据库项目扶持资金补贴，须忠实执行中国商品诚信数据库的筛选标准、全心全意为消费者服务。</p>
+          <router-link to="/agency/2"><button class="btn ckxq">查看详情</button></router-link>
+        </div>
+        <div class="col-4 see-detail">
+          <div class="logo ssjglzx">
+            <img :src="ssjglzx"/>
+          </div>
+          <h4>省级服务中心</h4>
+          <p>省级服务中心是中国商品诚信数据库授权设立的项目省级服务机构，隶属于中国商品诚信数据库服务中心，针对性服务该省申报企业，管理和监督该省市级管理中心、认证官工作，完善该省服务体系。</p>
+          <router-link to="/agency/3"><button class="btn ckxq">查看详情</button></router-link>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row footer text-center">
+        <div class="col-6">
+          <a>关于我们</a>
+          <a>服务协议</a>
+          <a>联系我们</a>
+          <a>官网网站</a>
+          <a>企业入库</a>
+          <a href="https://www.wnbiaodan.com/f/tDYSrb" target="_blank">申请报告</a>
+        </div>
+        <div class="col-6">
+          <small>版权所有 @中国商品诚信数据库技术服务中心 ALL Rights Reserved 蜀ICP备16015082号-2 </small>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import sbxt from '@/assets/img/sbxt.png'
+import sjglzx from '@/assets/img/sjglzx.png'
+import ssjglzx from '@/assets/img/ssjglzx.png'
 import waveTop from '@/assets/login/wave-top.png'
 import waveMiddle from '@/assets/login/wave-mid.png'
 import waveBottom from '@/assets/login/wave-bot.png'
@@ -87,6 +129,9 @@ export default {
   name: 'login',
   data () {
     return {
+      sbxt,
+      sjglzx,
+      ssjglzx,
       waveTopd: {
         backgroundImage: `url(${waveTop})`
       },

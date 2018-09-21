@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+.step_head {
+  height: 80px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 0;
+}
+.step_title_logo {
+  margin-left: 60px;height: 60px; float: left;
+}
+.step_title {
+  float: left;margin-left: 20px;
+}
+.sq {
+  padding: 30px 60px;background: #f6f7fb;
+}
+.sq > div {
+  background-color: #4786ff;border-radius: 10px;
+}
+.sq > div > h3 {
+  margin-left: 100px;color: #fff;padding: 15px;line-height: 40px;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    color: #fff;
+    width: 180px;
+    background-color: rgba(73,43,253,0);
+    border-color: rgba(255,255,255,0.7);
+}
+.dl {
+    width: 110px;
+    margin: auto;
+    color: #fff;
+    border-color: rgb(1, 200, 83);
+    background-color: rgb(1, 200, 83);
+    position: absolute;
+    right: 170px;
+    top: 24px;
+}
+.ljsq {
+    width: 150px;
+    margin: auto;
+    color:#fff;
+    border-color: #fff;
+    position: absolute;
+    right: 170px;
+    top: 65px;
+}
+.center{
+  text-align: center;
+  font-size: 18px;
+  margin: 50px 0;
+}
