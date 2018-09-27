@@ -1,1 +1,67 @@
 @charset "utf-8";
+
+.index_more{background: #f6f7fb;
+  height: 100%;
+  padding-bottom: 200px;
+    width: 100%;}
+.index_chunk{ 
+position: relative;
+top:120px;
+left: 19%;
+margin: 0;
+width: 78%;background:#fff; padding: 40px 70px 55px;border-radius: 4px; box-shadow: 0px 20px 20px -20px #ddd;}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.title{
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 27px;
+}
+.card{
+  width: 250px;
+  height: 120px;
+  display: block;
+  border-radius: 5px;
+  margin-top: 25px;
+  padding-top: 20px;
+  background: linear-gradient(left, #f57373 , #ffe484);
+  background: -moz-linear-gradient(left, #f57373 , #ffe484);
+  background: -o-linear-gradient(left, #f57373 , #ffe484);
+  background: -webkit-linear-gradient(left,#f57373 , #ffe484);
+}
+.card > div{
+  color: #fff;
+}
+.card:focus {
+  outline: dotted 3px #f70a0a
+}
+.t_nav {
+  border-left: #4786ff solid 3px;
+  font-size: 18px;
+}
+.ssss {
+  color: #0070ff;
+  display: none;
+}
+.yyyy:hover + small {
+  display: block;
+}

@@ -1,1 +1,124 @@
 @charset "utf-8";
+.ms {
+  position: absolute;
+  right: 35px;
+  top: 25px;
+}
+.left_menu {
+    width: 15%;
+    min-width: 240px;
+    position: fixed;
+    left: 0;
+    /*background: #4063FF;*/
+    background-image: linear-gradient(to bottom,  rgb(73,43,253) , rgb(51,141,255));
+    background-size: 100% 100%;
+    text-align: center;
+    z-index: 101;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include wh(15%, 100%);
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+}
+.logo {
+  
+    min-width: 240px;
+    padding-top: 40px;
+    text-align: center;
+    display: list-item;
+    z-index:102;
+    h3 {
+        color: #fff;
+        line-height: 35px;
+        font-size: 20px;
+    }
+}
+
+.main-left_nav_list {
+    padding: 20px 0 60px 0;
+    margin-top: 50px;
+}
+.main-left_nav_list ul li a {
+    color: #fff;
+}
+
+.sidebar-menu > li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.sidebar-menu > li > a {
+    padding:20px 15px;
+    display: block;
+    color: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    font-size: 16px;
+}
+.sidebar-menu > li > a img {
+    width: 22px;
+    margin-right: 20px;
+}
+.sidebar-menu > li:hover > a, .sidebar-menu > li.active > a {
+    color: #fff;
+    background: #3b8fff;
+}
+.active {
+  background: #3b8fff;
+}
+.sidebar-menu > li:hover > a {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.sidebar-menu > li > .treeview-menu {
+    background: #472efc;
+    margin: 1px 0;
+}
+.sidebar-menu > li > .treeview-menu > li {
+  padding:20px 10px;
+    border-bottom: 1px solid #3d66fc;
+}
+.sidebar-menu > li .label, .sidebar-menu > li .badge {
+    margin-top: 3px;
+    margin-right: 5px;
+}
+.sidebar-menu li > a > .fa-angle-left {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+.sidebar-menu a {
+    color: #b8c7ce;
+    text-decoration: none;
+}
+.sidebar-menu .treeview-menu {
+    /*display: none;*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-menu .treeview-menu .treeview-menu {
+    padding-left: 20px;
+}
+.sidebar-menu .treeview-menu > li {
+    margin: 0;
+    padding: 20px 0;
+}
+.sidebar-menu .treeview-menu > li:hover, .sidebar-menu .treeview-menu > li.active {
+    background: #3b8fff;
+}
+.sidebar-menu .treeview-menu > li > a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+}

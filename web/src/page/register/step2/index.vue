@@ -104,8 +104,6 @@ export default {
       areacode: '',
       isShowSubmit: true,
       list: [],
-      errMsg: [],
-      infoTimer: null,
       reason: null
     }
   },

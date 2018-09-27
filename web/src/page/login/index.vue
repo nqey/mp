@@ -120,7 +120,8 @@ import waveTop from '@/assets/login/wave-top.png'
 import waveMiddle from '@/assets/login/wave-mid.png'
 import waveBottom from '@/assets/login/wave-bot.png'
 import logo from '@/assets/logo/logo.png'
-import { VERIFICATION_CODE, DOMAIN, getNoticesNewest } from '@/config/api/base-api'
+import { VERIFICATION_CODE, getNoticesNewest } from '@/config/api/base-api'
+import { DOMAIN } from '@/config/api/env'
 import { doLogin } from '@/config/api/declare-api'
 import { validate } from '@/config/validator'
 import { setCookie } from '@/config/cookie'
@@ -166,7 +167,7 @@ export default {
       })
     },
     @validate()
-    login () {
+    async login () {
       // 审核流程
       const router = {
         'baseWaitSubmit': '/step2/1',
@@ -181,14 +182,16 @@ export default {
         'registWaitPending': '/step5',
         'registUnPass': '/step4/2',
         'registWaitUnPending': '/step4/2',
-        'default': '/index'
+        'default': '/'
       }
-      doLogin(this.form)
-        .then((d) => {
-          window.sessionStorage.setItem('mp-userInfo', d)
-          setCookie('sb_token', d.token, 1000 * 60)
-          this.$router.push(router[d.state] || router.default)
-        })
+      const d = await doLogin(this.form)
+      window.sessionStorage.setItem('username', this.form.username)
+      window.sessionStorage.setItem('portrait', d.portrait)
+      window.sessionStorage.setItem('type', d.type)
+      window.sessionStorage.setItem('state', d.state)
+      window.sessionStorage.setItem('recommendId', d.cellphone)
+      setCookie('sb_token', d.token, 1000 * 60)
+      this.$router.push(router[d.state] || router.default)
     }
   },
   watch: {},

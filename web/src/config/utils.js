@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { IMAGE_SERVER_URL } from '@/config/api/env';
 
 /**
  * @param data
@@ -348,4 +349,22 @@ export const cancelable = (e) => {
       e.preventDefault()
     }
   }
+}
+
+/**
+ * 获取图片的全路径
+ * 详见官网： http://zimg.buaa.us/documents/
+ * @param url ： 图片地址
+ * @param params : { w ： 宽度, h ： 高度, q ： 质量的百分比(0-100整数), f : png/jpg（图片格式）, r : 旋转度数(0-360整数) }
+ * @return [] | String : 传入的url是一个数组，则返回数组，传入一个string则返回单个url
+ */
+export const getPictureUrl = (url, params = {}) => {
+  const p = Object.entries(params)
+    .map(s => `${s[0]}=${s[1]}`)
+    .reduce((a, b) => `${a}&${b}`)
+
+  if (typeof url === 'string') {
+    return IMAGE_SERVER_URL + url + (url.indexOf('?') >= 0 ? '&' : '?') + p
+  }
+  return url.map(v => IMAGE_SERVER_URL + v + (v.indexOf('?') >= 0 ? '&' : '?') + p)
 }

@@ -243,3 +243,31 @@ input,img {
 .input-error{
    border-color: red;
 }
+.index_more{
+  position: absolute;
+  /*height: 100%;*/
+  overflow: hidden;
+  width: 100%;
+  background: #f6f7fb;
+  .index_chunk{ 
+    position: relative;
+    top:120px;
+    left: 19%;
+    margin: 0;
+    width: 78%;
+    background:#fff;
+    padding: 40px 70px 130px;
+    border-radius: 4px;
+    box-shadow: 0px 20px 20px -20px #ddd;
+  }
+}
+.btn_search{
+  padding: 7px 20px;
+  margin: 0 3px;
+  background: #327BFB;
+  border-radius: 5px;
+  color: #fff;
+}
+.form-inline .form-group{
+  margin: 6px 0;
+}

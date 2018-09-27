@@ -2,38 +2,38 @@
   <div style="margin-right: 20px;">
     <v-big-img v-if="isShowBigImg" :imgSrc="serverurl+imgSrc" @hideBigImg="closeBigImg"></v-big-img>
     <div class="imgW">
-       <img :src="serverurl+imgSrc"></img>
-       <div class="resize">
-       	<span  class="glyphicon glyphicon-resize-full" @click="showBigImg"></span>
-       </div>
+      <img :src="serverurl+imgSrc">
+      <div class="resize">
+        <span class="glyphicon glyphicon-resize-full" @click="showBigImg"></span>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { IMAGE_SERVER_URL } from '@/config/env';
-import vBigImg from '@/components/img/bigImg';
+import { IMAGE_SERVER_URL } from '@/config/api/env'
+import vBigImg from '@/components/img/bigImg'
 
 export default {
   name: 'mimg',
   props: ['imgSrc'],
-  data() {
+  data () {
     return {
       serverurl: IMAGE_SERVER_URL,
-      isShowBigImg: false,
-    };
+      isShowBigImg: false
+    }
   },
   components: {
-    'v-big-img': vBigImg,
+    'v-big-img': vBigImg
   },
   methods: {
-    showBigImg() {
-      this.isShowBigImg = true;
+    showBigImg () {
+      this.isShowBigImg = true
     },
-    closeBigImg() {
-      this.isShowBigImg = false;
-    },
-  },
-};
+    closeBigImg () {
+      this.isShowBigImg = false
+    }
+  }
+}
 
 </script>
 <style lang="scss" scoped>

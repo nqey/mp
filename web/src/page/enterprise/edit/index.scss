@@ -1,1 +1,40 @@
 @charset "utf-8";
+.t_nav {
+  border-left: #4786ff solid 3px;
+  font-size: 18px;
+}
+.form-inline{ margin-top: 60px; }
+.fc{color: #4786ff; border-bottom: 1px solid #4786ff; margin-right: 10px;}
+a {
+  text-decoration: none;
+}
+.txr {
+  text-align: right;
+}
+.txc {
+  text-align: center;
+}
+.iw {
+  width: 300px;
+}
+.iw600 {
+  width: 600px;
+}
+.label_height {
+  line-height: 35px;
+}
+.imb {
+  margin-bottom: 30px;
+}
+.info {
+  color: #ac2925;
+}
+.areafc {
+  color: #999;
+}
+.js-ajax-submit {
+    width: 350px;
+    margin: auto;
+    color:#fff;
+    background: rgb(1, 200, 83);
+}

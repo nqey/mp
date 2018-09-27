@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import { IMAGE_SERVER_URL } from '@/config/env';
+import { IMAGE_SERVER_URL } from '@/config/api/env';
 import vBigImg from '@/components/img/bigImg';
 
 export default {

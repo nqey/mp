@@ -25,7 +25,8 @@
 <script>
 import del from '@/assets/img/del.png'
 import upload from '@/assets/img/upload.png'
-import { uploadFile, IMAGE_SERVER_URL } from '@/config/api/base-api'
+import { uploadFile } from '@/config/api/base-api'
+import { IMAGE_SERVER_URL } from '@/config/api/env'
 
 import vBigImg from '@/components/img/big'
 

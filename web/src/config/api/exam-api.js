@@ -1,29 +1,13 @@
 import cache from '@/config/cache'
 import { xhr } from '@/config/api/http'
-
-const env = (() => {
-  if (/cpsdb61.com/.test(window.location.hostname)) {
-    return 'test'
-  } else if (/cpsdb.com/.test(window.location.hostname)) {
-    return 'online'
-  }
-  return 'local'
-})()
-
-const apiSrv = {
-  test: '//exam.cpsdb61.com/',
-  online: '//exam.cpsdb.com/',
-  local: location.hostname
-}[env]
-
-// const apiSrv = process.env.NODE_ENV === 'development' ? '//exam.cpsdb61.com/' : '//exam.cpsdb.com/'
+import { EXAM_BASE_URL } from '@/config/api/env'
 
 /**
  * @author 秦超
  * @returns 获取答卷
  */
 export const getExams = async (id) => {
-  const res = await xhr.get(`${apiSrv}exams/declareexamination/app/allsubjects`, {
+  const res = await xhr.get(`${EXAM_BASE_URL}exams/declareexamination/app/allsubjects`, {
     adapter: cache({
       local: true
     })
@@ -36,7 +20,7 @@ export const getExams = async (id) => {
  * @returns 提交答卷
  */
 export const postAnswer = async (params, self) => {
-  const res = await xhr.post(`${apiSrv}/exams/declareexamination/submission`, params)
+  const res = await xhr.post(`${EXAM_BASE_URL}/exams/declareexamination/submission`, params)
   if (!res.data.success) {
     self.$popup.show({
       title: '提示信息',
@@ -63,12 +47,3 @@ export const postAnswer = async (params, self) => {
     })
   }
 }
-
-/**
- * @author 秦超
- * @returns 提交答卷
- */
-// export const getIllustrate = async (params) => {
-//   const res = await xhr.post(`${apiSrv}/exams/declareexamination/submission`, params)
-//   return res.data.data
-// }

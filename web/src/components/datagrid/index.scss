@@ -1,1 +1,101 @@
 @charset "utf-8";
+
+/*样式在下面完成*/
+.datagrid-container {
+
+}
+
+.datagrid-title {
+font-size: 16px;
+font-weight: 600;
+padding-bottom: 10px;
+color: #6d6d6d;
+}
+
+.datagrid-title-text {
+padding: 15px;
+border-left: 3px solid #4786ff;
+}
+
+.datagrid-toolbar {
+width: 100%;
+height: 60px;
+padding: 15px;
+border-bottom: none;
+}
+
+.datagrid-toolbar-button {
+color: #fff;
+background-color: #337ab7;
+display: inline-block;
+padding: 6px 12px;
+margin: 0 10px;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+border: 1px solid #2e6da4;
+border-radius: 4px;
+}
+
+.datagrid-checkbox {
+width: 40px;
+zoom: 1.5;
+}
+
+.datagrid-frame {
+border-spacing: 0;
+border-collapse: collapse;
+background-color: transparent;
+}
+
+.datagrid-header {
+font-size: 15px;
+padding: 15px;
+}
+
+.datagrid-header-row {
+border: 1px solid #ddd;
+}
+
+.datagrid-header-cell {
+text-align: center;
+line-height: 1.42857143;
+cursor: pointer;
+padding: 15px;
+}
+
+.datagrid-header-check {
+width: 40px;
+text-align: center;
+}
+
+.datagrid-body {
+text-align: center;
+}
+
+.datagrid-body-row {
+border: 1px solid #ddd;
+}
+
+.datagrid-body-cell {
+padding: 15px;
+}
+
+.datagrid-action {
+
+}
+
+.datagrid-footer {
+border: 1px solid #ddd;
+background-color: #f1f1f1;
+}
