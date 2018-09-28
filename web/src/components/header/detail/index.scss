@@ -70,3 +70,17 @@
   font-size: 18px;
   margin: 50px 0;
 }
+.link-sign{
+  overflow: hidden;
+  a{
+    float: right;
+    width: 121px;
+    margin: auto;
+    color: #fff;
+    border-color: #01c853;
+    background-color: #01c853;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 22px;
+  }
+}

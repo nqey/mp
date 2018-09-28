@@ -54,7 +54,7 @@ export const getAreaTree = async () => {
   } else {
     msg.error('网络异常')
   }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -65,13 +65,13 @@ export const getValidatecode = async (type, cellphone) => {
   const res = await xhr.get(`${BASE_URL}publics/sms/${type}/${cellphone}`)
   // 判断http状态码
   if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (res.data.message) {
+    if (!res.data.success) {
       msg.error(res.data.message)
     }
   } else {
     msg.error('网络异常')
   }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -84,11 +84,11 @@ export const uploadFile = async (params) => {
   })
   // 判断http状态码
   if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (res.data.message) {
+    if (!res.data.success) {
       msg.error(res.data.message)
     }
   } else {
     msg.error('网络异常')
   }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }

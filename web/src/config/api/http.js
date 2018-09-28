@@ -14,16 +14,20 @@ axios.interceptors.request.use((config) => {
   // 在发送请求之前做些什么
   if (['post', 'put', 'patch'].indexOf(config.method) >= 0) {
     if (config.type !== 'upload') {
-      config.data = qs.stringify(config.data)
+      config.data = qs.stringify(reomveBlank(config.data))
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
     }
   } else if (config.method === 'get') {
     config.params = reomveBlank(config.params)
   }
   return config
-}, (error) => {
-  Promise.reject(error)
-})
+}, error => Promise.reject(error))
+
+axios.interceptors.response.use((response) => {
+  // 判断http状态码
+  if (!(response && [200, 304, 400].indexOf(response.status) > -1)) Message.error('网络异常')
+  return response
+}, error => Promise.reject(error))
 
 export const xhr = axios
 export const msg = Message

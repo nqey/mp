@@ -10,9 +10,9 @@ export const ENTERPRISE_TYPE = {
 }
 
 export const TRAFFIC_LIGHT = {
-  red: 'color: red',
-  yellow: 'color: #ec971f',
-  green: 'color: #5cb85c'
+  red: 'red',
+  yellow: '#ec971f',
+  green: '#5cb85c'
 }
 
 // 工厂管理新增 9-20 zsp

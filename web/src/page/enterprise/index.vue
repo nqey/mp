@@ -21,7 +21,7 @@
             <input type="text" class="form-control iw600" placeholder="请输入真实姓名" v-model="charger" val-required>
             <br/>
             <br/>
-            &#12288;<small class="areafc">企业法人必须是真是姓名，与营业执照上相同</small>
+            &#12288;<small class="areafc">企业法人必须是真实姓名，与营业执照上相同</small>
           </div>
           <div class="form-group col-sm-2 txr clearfix">
             <label class="label_height"><span class="info">*</span> 手机号码：</label>

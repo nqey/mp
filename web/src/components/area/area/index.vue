@@ -4,23 +4,25 @@
         <option value="">请选择省份</option>
         <option v-for="(item, i) in provinces" :value="item.code" :key="i">{{item.text}}</option>
       </select>
-      <select v-show="citys.length > 0" class='form-control' @change="queryTown" v-model="city">
+      <select v-show="citys.length > 0" class='form-control' @change="queryTown" v-model="city" v-if="type!=='3'">
         <option value="">请选择市</option>
         <option v-for="(item, i) in citys" :value="item.code" :key="i">{{item.text}}</option>
       </select>
-      <select v-show="towns.length > 0" class='form-control' v-model="town" @change="sendData">
+      <select v-show="towns.length > 0" class='form-control' v-model="town" @change="queryPlaces();sendData()" v-if="type!=='3'">
         <option value="">请选择区/县</option>
         <option v-for="(item, i) in towns" :value="item.code" :key="i">{{item.text}}</option>
       </select>
+      <span v-if="type==='2'" style="line-height: 35px;">剩余名额 <font class="fc">{{rmplaces}}</font></span>
   </div>
 </template>
 
 <script>
 import { getAreaTree } from '@/config/api/base-api'
+import { getArealimitAreacode } from '@/config/api/declare-api'
 
 export default {
   name: 'geoArea',
-  props: ['areacode'],
+  props: ['areacode', 'type'],
   data () {
     return {
       province: '',
@@ -28,7 +30,8 @@ export default {
       town: '',
       provinces: [],
       citys: [],
-      towns: []
+      towns: [],
+      rmplaces: 0
     }
   },
   watch: {
@@ -40,6 +43,13 @@ export default {
       getAreaTree().then((d) => {
         this.provinces = d
         this.setAreaCode()
+      })
+    },
+    queryPlaces () {
+      getArealimitAreacode(this.town).then((d) => {
+        this.rmplaces = d
+      }).catch(() => {
+        this.rmplaces = 0
       })
     },
     queryCity () {

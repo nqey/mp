@@ -7,15 +7,8 @@ import { GOODS_BASE_URL } from '@/config/api/env'
  */
 export const platformGoodsQuery = async (params) => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/goods/query`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -24,15 +17,8 @@ export const platformGoodsQuery = async (params) => {
  */
 export const platformGoodsQueryCount = async (params) => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/goods/query/count`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -41,15 +27,8 @@ export const platformGoodsQueryCount = async (params) => {
  */
 export const addPlatformGoodsRules = async (goodsId, params) => {
   const res = await xhr.post(`${GOODS_BASE_URL}organiz/goods/rules/${goodsId}`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -60,15 +39,8 @@ export const getPlatformGoodsRules = async (goodsId, params) => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/goods/rules/${goodsId}`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -77,15 +49,8 @@ export const getPlatformGoodsRules = async (goodsId, params) => {
  */
 export const platformStatisticalCodeQuery = async (params) => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/code/query`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -94,15 +59,8 @@ export const platformStatisticalCodeQuery = async (params) => {
  */
 export const platformStatisticalCodeQueryCount = async (params) => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/code/query/count`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -111,15 +69,8 @@ export const platformStatisticalCodeQueryCount = async (params) => {
  */
 export const platformCodeGetLogs = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/code/get/logs`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -128,15 +79,8 @@ export const platformCodeGetLogs = async () => {
  */
 export const platformCodeGetLog = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/code/get/log`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -145,15 +89,8 @@ export const platformCodeGetLog = async () => {
  */
 export const goodsAddress = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/sku/everyday`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -162,15 +99,8 @@ export const goodsAddress = async () => {
  */
 export const qrCodeAddress = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/code/everyday`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -179,15 +109,8 @@ export const qrCodeAddress = async () => {
  */
 export const qrCodeSummaryAddress = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/code/summary`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -196,13 +119,6 @@ export const qrCodeSummaryAddress = async () => {
  */
 export const summaryAddress = async () => {
   const res = await xhr.get(`${GOODS_BASE_URL}organiz/statistical/code/summary`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }

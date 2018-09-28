@@ -138,7 +138,7 @@ export default {
   computed: {},
   methods: {
     view (row) {
-      this.$router.push(`/declarer/officer/view/${row.id}`)
+      this.$router.push(`/ent/officer/view/${row.id}`)
     },
     async delete (row) {
       const { id } = row

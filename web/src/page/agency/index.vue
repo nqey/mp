@@ -6,15 +6,15 @@
       <div class="index_chunk">
         <div class="t_nav clearfix">
           &#12288;{{title}}
-          <small class="pull-right" style="font-size: 12px">
+       <!--    <small class="pull-right" style="font-size: 12px">
             联系申报服务处请拨打 400-666-6666
-          </small>
+          </small> -->
         </div>
         <hr>
         <div class="form-inline row clearfix">
           <div class="col-6">
            <v-area @acceptData="setLiveAddress"></v-area>
-           <input type="text" class="form-control" placeholder="请输入机构名称或负责人" v-model="params.name">
+           <input type="text" class="form-control" placeholder="请输入名称" v-model="params.name">
           </div>
           <div class="col-6">
             <div class="input-group">
@@ -24,26 +24,63 @@
         </div>
         <br/>
         <div v-show="resData.length > 0">
-          <table class="table">
+          <table class="table" v-if="$route.params.type === '1'">
             <thead>
               <tr>
                 <th>序号</th>
-                <th>机构名称</th>
-                <th>负责人</th>
-                <th>负责区域</th>
-                <th v-if="$route.params.type === '1'">地址</th>
-                <th v-if="$route.params.type !== '1'">联系方式</th>
+                <th>姓名</th>
+                <th>联系方式</th>
+                <th>所属机构</th>
+                <th>机构联系方式</th>
+                <th>地址</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, i) of resData" :key="i">
-                <th scope="row">{{item.id}}</th>
+                <th>{{item.id}}</th>
                 <td>{{item.name}}</td>
-                <td v-if="$route.params.type === '1'">{{item.charger}}</td>
-                <td v-if="$route.params.type !== '1'">{{item.chargerName}}</td>
-                <td>{{item.chargeAddress}}</td>
-                <td v-if="$route.params.type === '1'">{{item.address}}</td>
-                <td v-if="$route.params.type !== '1'">{{item.cellphone}}</td>
+                <td>{{item.cellphone}}</td>
+                <td>{{item.organizName}}</td>
+                <td>{{item.organizCellphone}}</td>
+                <td>{{item.declarerAddress}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table" v-if="$route.params.type === '2'">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>公司</th>
+                <th>所属服务处</th>
+                <th>地址</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, i) of resData" :key="i">
+                <th>{{item.snId}}</th>
+                <td>{{item.companyName}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.address}}</td>
+              </tr>
+            </tbody>
+          </table>
+           <table class="table" v-if="$route.params.type === '3'">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>公司</th>
+                <th>负责人</th>
+                <th>区域</th>
+                <th>联系方式</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, i) of resData" :key="i">
+                <th>{{item.id}}</th>
+                <td>{{item.companyName}}</td>
+                <td>{{item.chargerName}}</td>
+                <td>{{item.area}}</td>
+                <td>{{item.cellphone}}</td>
               </tr>
             </tbody>
           </table>
@@ -58,7 +95,7 @@
 import pagination from '@/components/pagination'
 import detailHead from '@/components/header/detail'
 import area from '@/components/area/area'
-import { getDeclareOrganiz, getDeclareOrganizCount, getDeclareFwzx, getDeclareFwzxCount } from '@/config/api/declare-api'
+import { getDeclareOrganiz, getDeclareOrganizCount, getFreedomList, getfreedomCount, getDeclareFwzx, getDeclareFwzxCount } from '@/config/api/declare-api'
 
 export default {
   name: 'agency',
@@ -87,26 +124,26 @@ export default {
       if (type === '1') {
         this.title = '申报官'
         getDeclareOrganiz(this.params).then((d) => {
-          this.resData = d
+          this.resData = d || []
         })
         getDeclareOrganizCount(this.params).then((d) => {
-          this.pages = Math.ceil(d / this.form.rows)
+          this.pages = Math.ceil(d / this.params.rows)
         })
       } else if (type === '2') {
         this.title = '申报服务处'
-        getDeclareFwzx(type, this.params).then((d) => {
-          this.resData = d
+        getFreedomList(this.params).then((d) => {
+          this.resData = d || []
         })
-        getDeclareFwzxCount(type, this.params).then((d) => {
-          this.pages = Math.ceil(d / this.form.rows)
+        getfreedomCount(this.params).then((d) => {
+          this.pages = Math.ceil(d / this.params.rows)
         })
       } else if (type === '3') {
         this.title = '省级服务中心'
-        getDeclareFwzx(type, this.params).then((d) => {
-          this.resData = d
+        getDeclareFwzx(this.params).then((d) => {
+          this.resData = d || []
         })
-        getDeclareFwzxCount(type, this.params).then((d) => {
-          this.pages = Math.ceil(d / this.form.rows)
+        getDeclareFwzxCount(this.params).then((d) => {
+          this.pages = Math.ceil(d / this.params.rows)
         })
       }
     },

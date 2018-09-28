@@ -1,0 +1,95 @@
+@charset "utf-8";
+.index_more{
+  position: absolute; 
+  top: 80px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: #fff;
+  .index_chunk{
+    position: relative;
+    width: 85%;
+    margin:  auto;
+    background: #ffffff;
+  }
+}
+.t_nav {
+  height: 50px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+.fc{color: #4786ff; border-bottom: 1px solid #4786ff;}
+.hqyzm{background: #dae7ff;color: #4786ff;}
+a {
+  text-decoration: none;
+}
+.txr {
+  text-align: right;
+}
+.txc {
+  text-align: center;
+}
+.iw {
+  width: 300px;
+}
+.iw600 {
+  width: 450px;
+}
+.label_height {
+  height: 35px;
+  line-height: 35px;
+}
+.imb {
+  margin-bottom: 30px;
+}
+.info {
+  color: red;
+}
+.areafc {
+  color: #999;
+}
+.js-ajax-submit {
+    width: 350px;
+    margin: auto;
+    color:#fff;
+    background: rgb(1, 200, 83);
+}
+.mt {
+  margin-top: 30px;
+}
+.select_type{
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.submit_btn{
+  text-align: center;
+  button{
+    width: 350px;
+    height: 35px;
+    border-radius: 17px;
+  }
+}
+.step_head{
+  height: 80px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 0;
+  img{
+    margin-left: 60px;
+    height: 60px;
+    float: left;
+  }
+  h3{
+    float: left;
+    margin-left: 20px;
+  }
+}

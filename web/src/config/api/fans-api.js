@@ -9,15 +9,8 @@ export const fansNumberAddress = async (params) => {
   const res = await xhr.get(`${FANS_BASE_URL}organiz/statistical/fansnumber`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -28,13 +21,6 @@ export const fansAddress = async (params) => {
   const res = await xhr.get(`${FANS_BASE_URL}organiz/statistical/linechart`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }

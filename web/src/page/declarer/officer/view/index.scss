@@ -1,0 +1,192 @@
+@charset "utf-8";
+  .index_more{
+    padding: 0;
+    background: #F2F6F7;
+    .form-horizontal{
+      background: #fff;
+      margin: 15px;
+      .form-group{
+        margin: 0 -15px 22px;
+        overflow: hidden;
+      }
+      .form-group:last-child{
+        margin: 0 -15px 0;
+      }
+    }
+    // 个人信息
+    .second-box{
+      margin: 0 15px;
+      overflow: hidden;
+      .col-sm-6{
+        .form-horizontal{
+          margin: 0;
+          >.form-group{
+            margin: 0;
+            h4{
+              height: 40px;
+            }
+            .col-sm-6{
+              padding-left: 20px;
+            }
+          }
+        }
+      }
+      .col-sm-6:first-child{
+        padding: 0 7px 0 0;
+      }
+      .col-sm-6:last-child{
+        padding: 0 0 0 7px;
+      }
+    }
+    .form-group{
+      margin-bottom: 30px; 
+      overflow: hidden;
+      .col-sm-2,.col-sm-4{
+        padding: 0;
+      }
+    }
+  }
+  // 标题
+  .title {
+    margin: 0;
+    height: 38px;
+    position: relative;
+    text-align: left;
+  }
+  .bb{
+    border-bottom: 1px solid #EDF2F5;
+  }
+  // 按钮
+  .btn-success_pass{
+    width: 110px;
+    background-color: #4063ff;
+    color: #fff;
+  }
+  
+  .btn-danger-nopass{
+    width: 110px;
+    margin-left: 20px;
+    background-color: #d9534f;
+    color: #fff;
+  }
+.xiaz {
+  width: 160px;
+  height: 40px;
+  line-height: 28px;
+  background: #4063ff;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 20px;
+  outline: none;
+  &:focus{
+    outline: none
+  }
+}
+// 二维码
+.erweima{
+  text-align: center;
+  >p{
+    margin: 10px 0;
+    a{
+      color: #4063ff;
+      font-size: 15px;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    img{
+      display: inline-block;
+    }
+    button{
+      width: 160px;
+      height: 40px;
+      line-height: 28px;
+      background: #4063ff;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      border-radius: 20px;
+      outline: none;
+      &:focus{
+        outline: none
+      }
+    }
+  }
+}
+// 基本信息头部
+.basic-info{
+  .col-sm-2{
+    top: -3px;
+    height: 30px;
+    >span{
+      padding: 10px;
+      border-bottom: 2px solid transparent;
+      font-size: 16px;
+      cursor: pointer;
+      color: #222;
+      font-weight: 700;
+    }
+    .active{
+      color: #4063ff;
+      border-color: #4063ff;
+    }    
+  }
+}
+// 身份证
+.identify-card{
+  >label{
+    padding-right: 0;
+  }
+}
+.h40{
+  height: 60px;
+  line-height: 60px;
+}
+.img-error{
+  display: inline-block;
+  border: 1px solid #f00;
+}
+.green{
+  color: green;
+}
+.red{
+  color: red
+}
+span {
+  color: #999;
+}
+.view-change {
+  .form-group:first-child {
+    margin-top: 30px !important;
+  }
+}
+
+.index_more{
+  position: absolute;
+  /*height: 100%;*/
+  overflow: hidden;
+  padding-bottom: 200px;
+  width: 100%;
+  .index_chunk{ 
+    position: relative;
+    top:120px;
+    left: 19%;
+    margin: 0;
+    width: 78%;
+    background:#fff;
+    padding: 40px 70px 55px;
+    border-radius: 4px;
+    box-shadow: 0px 20px 20px -20px #ddd;
+  }
+}
+.btn_search{
+  padding: 7px 20px;
+  margin: 0 3px;
+  background: #327BFB;
+  border-radius: 5px;
+  color: #fff;
+}
+.form-inline .form-group{
+  margin: 6px 0;
+}

@@ -45,7 +45,7 @@
             <label  class="col-sm-4 control-label">选择申请区域：</label>
             <div class="col-sm-5">
               <span class="label_height" v-show="$route.params.type === '2'">{{ organizAddress }}</span>
-              <v-apply-area v-show="$route.params.type === '1'" @acceptData="setApplyAddress"></v-apply-area>&#12288;
+              <v-area v-show="$route.params.type === '1'" @acceptData="setApplyAddress" type="2"></v-area>&#12288;
             </div>
           </div>
           <div class="form-group">
@@ -80,7 +80,6 @@
 import multipleUpload from '@/components/upload/multiple'
 import area from '@/components/area/area'
 import registerHead from '@/components/header/register'
-import applyArea from '@/components/area/apply'
 import { putBaseinfo, getBaseinfo } from '@/config/api/declare-api'
 
 export default {
@@ -110,8 +109,7 @@ export default {
   components: {
     'v-multiple-upload': multipleUpload,
     'v-area': area,
-    'v-register-head': registerHead,
-    'v-apply-area': applyArea
+    'v-register-head': registerHead
   },
   methods: {
     frontUrl (d) {

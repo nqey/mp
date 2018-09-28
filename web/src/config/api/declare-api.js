@@ -7,15 +7,8 @@ import { DECLARE_BASE_URL } from '@/config/api/env'
  */
 export const doLogin = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}publics/declarer`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -23,16 +16,35 @@ export const doLogin = async (params) => {
  * @returns 申报服务处列表
  */
 export const getDeclareOrganiz = async (params) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}publics/declare/organiz`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/declarer/list`, {
+    params
+  })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author 秦超
+ * @returns 申报服务处列表
+ */
+export const getFreedomList = async (params) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/organiz/freedomList`, {
+    params
+  })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author 秦超
+ * @returns 申报服务处列表
+ */
+export const getfreedomCount = async (params) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/organiz/freedomCount`, {
+    params
+  })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -40,16 +52,11 @@ export const getDeclareOrganiz = async (params) => {
  * @returns 申报服务处总数
  */
 export const getDeclareOrganizCount = async (params) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}publics/declare/organiz/count`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/declarer/count`, {
+    params
+  })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -57,17 +64,10 @@ export const getDeclareOrganizCount = async (params) => {
  * param type 2: 市级 3:省级
  * @returns 查询服务中心列表
  */
-export const getDeclareFwzx = async (type, params) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}publics/user/${type}`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+export const getDeclareFwzx = async (params) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/provence/list`, { params })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -75,17 +75,10 @@ export const getDeclareFwzx = async (type, params) => {
  * param type 2: 市级 3:省级
  * @returns 查询服务中心列表
  */
-export const getDeclareFwzxCount = async (type, params) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}publics/user/count/${type}`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+export const getDeclareFwzxCount = async (params) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/provence/count`, { params })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -94,15 +87,8 @@ export const getDeclareFwzxCount = async (type, params) => {
  */
 export const putPassword = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}publics/user/password`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -110,16 +96,9 @@ export const putPassword = async (params) => {
  * @returns 申报服务处注册
  */
 export const postOrganiz = async (params) => {
-  const res = await xhr.post(`${DECLARE_BASE_URL}publics/organiz`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  const res = await xhr.post(`${DECLARE_BASE_URL}publics/organiz/addInfo`, params)
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -128,15 +107,8 @@ export const postOrganiz = async (params) => {
  */
 export const putBaseinfo = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}organiz/baseInfo`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -145,15 +117,8 @@ export const putBaseinfo = async (params) => {
  */
 export const getBaseinfo = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/baseInfo`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -162,15 +127,8 @@ export const getBaseinfo = async () => {
  */
 export const registInfo = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}organiz/registInfo`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -178,16 +136,13 @@ export const registInfo = async (params) => {
  * @returns 获取负责区域名额
  */
 export const getArealimitAreacode = async (areaCode) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}organiz/registInfo/${areaCode}`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
+  const res = await xhr.get(`${DECLARE_BASE_URL}organiz/arealimit`, {
+    params: {
+      areaCode
     }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  })
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -198,15 +153,8 @@ export const declareGetRecommend = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/recommend/list`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -215,15 +163,8 @@ export const declareGetRecommend = async (params) => {
  */
 export const declareGetRecommendCount = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/recommend/count`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -232,15 +173,8 @@ export const declareGetRecommendCount = async () => {
  */
 export const organizDeclarerRecommendAmount = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/subsidy/amount`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -249,15 +183,8 @@ export const organizDeclarerRecommendAmount = async () => {
  */
 export const organizDeclarerRecommendAmountDetail = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/subsidy/detail`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -268,15 +195,8 @@ export const exterpriseList = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/enterprise/list`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -287,15 +207,8 @@ export const exterpriseListCount = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/enterprise/count`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -304,15 +217,8 @@ export const exterpriseListCount = async (params) => {
  */
 export const getBankList = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}publics/bank`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -321,15 +227,8 @@ export const getBankList = async () => {
  */
 export const applySubsidy = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}organiz/subsidy`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -338,15 +237,8 @@ export const applySubsidy = async (params) => {
  */
 export const subsidyRecard = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/subsidy/list`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -355,15 +247,8 @@ export const subsidyRecard = async () => {
  */
 export const subsidyRecardCount = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/subsidy/count`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -372,15 +257,8 @@ export const subsidyRecardCount = async () => {
  */
 export const getOrganizSubsidyBank = async () => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/subsidy/bank`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -391,15 +269,8 @@ export const getOrganizList = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/list`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -410,15 +281,8 @@ export const getOrganizListCount = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/count`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -429,15 +293,8 @@ export const getOrganizDeclarerList = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/declarer/list`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -448,15 +305,8 @@ export const getOrganizDeclarerListCount = async (params) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/declarer/count`, {
     params
   })
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -465,15 +315,8 @@ export const getOrganizDeclarerListCount = async (params) => {
  */
 export const deletePlatformDeclarer = async (id) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}platform/declarer/delete/${id}`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -482,15 +325,8 @@ export const deletePlatformDeclarer = async (id) => {
  */
 export const delPlatformOrganiz = async (id) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}platform/organiz/delete/${id}`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -499,16 +335,8 @@ export const delPlatformOrganiz = async (id) => {
  */
 export const addEnterprise = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}organiz/enterprise/info`, params)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  if (res.data.message) Promise.reject(new Error(res.data.message))
-  return res.data.data
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
 
 /**
@@ -517,13 +345,26 @@ export const addEnterprise = async (params) => {
  */
 export const getOrganizEnterpriseId = async (id) => {
   const res = await xhr.get(`${DECLARE_BASE_URL}organiz/enterprise/${id}`)
-  // 判断http状态码
-  if (res && [200, 304, 400].indexOf(res.status) > -1) {
-    if (!res.data.success) {
-      msg.error(res.data.message)
-    }
-  } else {
-    msg.error('网络异常')
-  }
-  return res.data.data || Promise.reject(new Error(res.data.message))
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author zsp
+ * @returns 申报官详情
+ */
+export const getOrganizDeclarerDetails = async (id) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}organiz/declarer/details/${id}`)
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author zsp
+ * @returns 省级服务中心注册
+ */
+export const postPublicsProvenceRegister = async (params) => {
+  const res = await xhr.post(`${DECLARE_BASE_URL}publics/provence/register`, params)
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }

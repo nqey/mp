@@ -230,17 +230,35 @@ const router = new Router({
         keepAlive: false,
         menu: true
       }
+    },
+    { // ---申报官列表===详情 9-26 zsp
+      path: '/ent/officer/view/:id',
+      name: 'declarerOfficerView',
+      component: r => require.ensure([], require => r(require('@/page/declarer/officer/view')), 'declarerOfficerView'),
+      meta: {
+        keepAlive: false,
+        menu: true
+      }
+    },
+    { // 省级服务中心---注册 9-27 zsp
+      path: '/organiz/provence/signin',
+      name: 'organizProvence',
+      component: r => require.ensure([], require => r(require('@/page/organiz/provence')), 'organizProvence'),
+      meta: {
+        keepAlive: false,
+        menu: false
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   const isLogin = !!getCookie('sb_token')
-  // 不是去登录页，而且没登录，那就去登录页；
-  if (to.path !== '/login' && !isLogin) {
+  if (!to.meta.munu) {
+    next()
+  } else if (to.path !== '/login' && !isLogin) {
     next({ path: '/login' })
   } else {
-    // 如果去登录页，随便你； 或者只要登录了，随便你去哪；
     next()
   }
 })

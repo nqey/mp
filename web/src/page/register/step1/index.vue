@@ -102,9 +102,11 @@ export default {
       this.isShowSubmit = true
       postOrganiz(this.params).then((d) => {
         setCookie('sb_token', d, 1000 * 60)
-        window.sessionStorage.setItem('username', this.param.username)
+        window.sessionStorage.setItem('username', this.params.cellphone)
         this.$router.push('/step11')
-      }).catch(() => { this.isShowSubmit = false })
+      }).catch(() => {
+        this.isShowSubmit = false
+      })
     }
   }
 }

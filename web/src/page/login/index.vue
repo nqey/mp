@@ -100,8 +100,8 @@
           <a>关于我们</a>
           <a>服务协议</a>
           <a>联系我们</a>
-          <a>官网网站</a>
-          <a>企业入库</a>
+          <a href="http://www.cpsdb.com">官网网站</a>
+          <a href="http://yw.cpsdb.com/register.html">企业入库</a>
           <a href="https://www.wnbiaodan.com/f/tDYSrb" target="_blank">申请报告</a>
         </div>
         <div class="col-6">

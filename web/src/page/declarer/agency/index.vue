@@ -150,26 +150,9 @@ export default {
       this.filter = { state: '' }
     }
   },
-  watch: {},
   components: {
     'v-datagrid': () => import('@/components/datagrid'),
     'el-date-picker': DatePicker
-  },
-  beforeCreate () {
-  },
-  cteated () {
-  },
-  beforeMount () {
-  },
-  mounted () {
-  },
-  beforeUpdate () {
-  },
-  updated () {
-  },
-  beforeDestroy () {
-  },
-  destroyed () {
   }
 }
 </script>
