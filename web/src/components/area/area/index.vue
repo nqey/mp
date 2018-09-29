@@ -1,18 +1,18 @@
 <template>
   <div class="area form-inline">
-      <select v-show="provinces.length > 0" class='form-control' @change="queryCity" v-model="province">
+      <select v-show="provinces.length > 0" class='form-control' @change="queryCity" v-model="province" :disabled="disabled">
         <option value="">请选择省份</option>
         <option v-for="(item, i) in provinces" :value="item.code" :key="i">{{item.text}}</option>
       </select>
-      <select v-show="citys.length > 0" class='form-control' @change="queryTown" v-model="city" v-if="type!=='3'">
+      <select v-show="citys.length > 0" class='form-control' @change="queryTown" v-model="city" v-if="type!=='3'" :disabled="disabled">
         <option value="">请选择市</option>
         <option v-for="(item, i) in citys" :value="item.code" :key="i">{{item.text}}</option>
       </select>
-      <select v-show="towns.length > 0" class='form-control' v-model="town" @change="queryPlaces();sendData()" v-if="type!=='3'">
+      <select v-show="towns.length > 0" class='form-control' v-model="town" @change="queryPlaces();sendData()" v-if="type!=='3'" :disabled="disabled">
         <option value="">请选择区/县</option>
         <option v-for="(item, i) in towns" :value="item.code" :key="i">{{item.text}}</option>
       </select>
-      <span v-if="type==='2'" style="line-height: 35px;">剩余名额 <font class="fc">{{rmplaces}}</font></span>
+      <span v-if="type==='2'" style="line-height: 35px;">剩余名额 <font style="color: blue;">{{rmplaces}}</font></span>
   </div>
 </template>
 
@@ -22,7 +22,20 @@ import { getArealimitAreacode } from '@/config/api/declare-api'
 
 export default {
   name: 'geoArea',
-  props: ['areacode', 'type'],
+  props: {
+    areacode: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       province: '',
@@ -46,8 +59,9 @@ export default {
       })
     },
     queryPlaces () {
+      if (this.type !== '2') return
       getArealimitAreacode(this.town).then((d) => {
-        this.rmplaces = d
+        this.rmplaces = d.remainNumber
       }).catch(() => {
         this.rmplaces = 0
       })

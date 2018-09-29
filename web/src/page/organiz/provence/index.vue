@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-error-info :errMsg="errMsg"></v-error-info>
-    <div class="col-12 step_head">
+    <div class="index_more">
+      <div class="col-12 step_head">
         <router-link to="/login"><img :src="logo" class="step_title_logo"/></router-link>
         <h3 class="step_title">CPS 申报服务处自主管理平台</h3>
       </div>
-    <div class="index_more">
       <div class="index_chunk">
-        <div class="t_nav">&#12288;省级服务中心注册</div>
+        <div class="t_nav">&#12288;{{isEdit ? title[1] : title[0]}}</div>
       <hr>
       <div class="form-inline clearfix">
         <div class="form-group col-sm-5 txr">
@@ -32,34 +32,34 @@
           <label class="label_height"><span class="info">*</span> 手机号码：</label>
         </div>
         <div class="form-group col-sm-7 imb">
-          <input type="text" class="form-control iw600" placeholder="请输入手机号码" v-model="cellphone" val-required val-cellphone>
+          <input type="text" class="form-control iw600" placeholder="请输入手机号码" v-model="cellphone" val-required val-cellphone :disabled="isEdit">
           <br/>
           &#12288;<small class="areafc">该手机号必须是负责人真实手机号码，每一个手机号码只能添加一名负责人。</small>
           <br/>
           <br/>
-          <input type="text" class="form-control iw" placeholder="请输入验证码" v-model="code" >
-          <button v-show="show" class="btn hqyzm"  @click="getCode" style="height: 34px;">获取验证码</button>
-          <button v-show="!show" class="btn hqyzm">{{count}} s</button>
+          <input type="text" class="form-control iw" placeholder="请输入验证码" v-model="code"  v-if="!isEdit">
+          <button v-show="show" class="btn hqyzm"  @click="getCode" style="height: 34px;" v-if="!isEdit">获取验证码</button>
+          <button v-show="!show" class="btn hqyzm" v-if="!isEdit">{{count}} s</button>
         </div>
         <!-- 密码 -->
-        <div class="form-group col-sm-5 txr">
+        <div class="form-group col-sm-5 txr" v-if="!isEdit">
           <label class="label_height"><span class="info">*</span> 密码：</label>
         </div>
-        <div class="form-group col-sm-7 imb">
+        <div class="form-group col-sm-7 imb" v-if="!isEdit">
           <input type="password" class="form-control iw600" placeholder="请输入密码" v-model="password" val-required val-password>
         </div>
         <!-- 推荐工号 -->
-        <div class="form-group col-sm-5 txr">
-          <label class="label_height"><span class="info"></span> 推荐工号：</label>
+        <div class="form-group col-sm-5 txr" v-if="!isEdit">
+          <label class="label_height"><span class="info"></span> 推荐人工号：</label>
         </div>
-        <div class="form-group col-sm-7 imb">
+        <div class="form-group col-sm-7 imb" v-if="!isEdit">
           <input type="text" class="form-control iw600" placeholder="请输入推荐工号" v-model="recommend">
         </div>
         <div class="form-group col-sm-5 txr clearfix">
             <label class="label_height"><span class="info">*</span> 负责区域：</label>
         </div>
         <div class="form-group col-sm-7 imb">
-           <v-area @acceptData="setAreaCode" type="3"></v-area>
+           <v-area @acceptData="setAreaCode" type="3" :disabled="isEdit" :areacode="areaCode"></v-area>
         </div>
         <div class="form-group col-sm-5 txr">
           <label class="label_height"><span class="info">*</span> 详细地址：</label>
@@ -84,10 +84,12 @@
           <small class="info label_height">请上传本人真实身份证，否则审核不通过。</small>
           <div class="clearfix"></div>
           <div class="pull-left" style="width: 200px;margin-right: 30px;">
-            <v-multiple-upload len="1" uploadid="upload2" title="上传法人身份证正面" @acceptData="frontUrl"></v-multiple-upload>
+            <v-multiple-upload len="1" uploadid="upload2" title="上传法人身份证正面" @acceptData="frontUrl" v-if="!isEdit"></v-multiple-upload>
+            <v-img v-if="isEdit" :imgSrc="idFrontUrl"></v-img>
           </div>
           <div class="pull-left" style="width: 200px;">
-            <v-multiple-upload len="1" uploadid="upload3" title="上传法人身份证背面" @acceptData="backUrl"></v-multiple-upload>
+            <v-multiple-upload len="1" uploadid="upload3" title="上传法人身份证背面" @acceptData="backUrl" v-if="!isEdit"></v-multiple-upload>
+            <v-img v-if="isEdit" :imgSrc="idBackUrl"></v-img>
           </div>
         </div>
         <div class="form-group col-sm-5 txr clearfix">
@@ -100,7 +102,8 @@
           <small class="info label_height">请认真填写每一必填项，再上传完整的尽职调查表</small>
           <br/>
           <br/>
-          <v-multiple-upload len="5" title="上传尽职调查表" @acceptData="setChargerInvestigationUrl" uploadid="upload4"></v-multiple-upload>
+          <v-multiple-upload len="5" title="上传尽职调查表" @acceptData="setChargerInvestigationUrl" uploadid="upload4" v-if="!isEdit"></v-multiple-upload>
+          <v-img v-if="isEdit" :imgSrc="chargerInvestigationUrl"></v-img>
         </div>
         <!-- 单位职责调查 -->
         <div class="form-group col-sm-5 txr ">
@@ -113,7 +116,8 @@
           <small class="info label_height">请认真填写每一必填项，再上传完整的尽职调查表</small>
           <br/>
           <br/>
-          <v-multiple-upload len="5" title="上传尽职调查表" @acceptData="setcompanyInvestigationUrl" uploadid="upload5"></v-multiple-upload>
+          <v-multiple-upload len="5" title="上传尽职调查表" @acceptData="setcompanyInvestigationUrl" uploadid="upload5" v-if="!isEdit" ></v-multiple-upload>
+          <v-img v-if="isEdit" :imgSrc="companyInvestigationUrl"></v-img>
         </div>
         <!-- ********* -->
         <div class="form-group col-sm-5 txr clearfix">
@@ -126,7 +130,8 @@
           <small class="info label_height">请上传完整的承诺公函</small>
           <br/>
           <br/>
-          <v-multiple-upload len="1" title="上传承诺公函" @acceptData="setPromiseLetterUrl" uploadid="upload6"></v-multiple-upload>
+          <v-multiple-upload len="1" title="上传承诺公函" @acceptData="setPromiseLetterUrl" uploadid="upload6" v-if="!isEdit"></v-multiple-upload>
+          <v-img v-if="isEdit" :imgSrc="promiseLetterUrl"></v-img>
         </div>
         <div class="form-group col-sm-5 txr clearfix">
           <label class="label_height"><span class="info">*</span> 申请公函：</label>
@@ -138,14 +143,15 @@
           <small class="info label_height">请上传完整的申请公函</small>
           <br/>
           <br/>
-          <v-multiple-upload len="1" title="上传申请公函" @acceptData="setApplyLetterUrl" uploadid="upload7"></v-multiple-upload>
+          <v-multiple-upload len="1" title="上传申请公函" @acceptData="setApplyLetterUrl" uploadid="upload7" v-if="!isEdit"></v-multiple-upload>
+          <v-img v-if="isEdit" :imgSrc="applyLetterUrl"></v-img>
         </div>
         <div class="form-group col-sm-12 imb submit_btn">
-          <button v-show="isShowSubmit" type="button" class="btn btn-success" style="height: 35px;" @click="submit">提交</button>
-          <button v-show="!isShowSubmit" type="button" class="btn btn-success" style="height: 35px;" disabled>提交</button>
+          <button v-show="!isEdit" type="button" class="btn btn-success" style="height: 35px;" @click="submit">注册</button>
+          <button v-show="isEdit" type="button" class="btn btn-success" style="height: 35px;" @click="edit">注册</button>
           <br/>
           <br/>
-          <p class="areafc">申报官信息需审核</p>
+          <p class="areafc">注册信息需审核</p>
         </div>
       </div>
     </div>
@@ -157,7 +163,7 @@
 import multipleUpload from '@/components/upload/multiple'
 import errInfo from '@/components/info/error'
 import { getValidatecode } from '@/config/api/base-api'
-import { postPublicsProvenceRegister } from '@/config/api/declare-api'
+import { postPublicsProvenceRegister, getOrganizProvenceId, putOrganizProvenceId } from '@/config/api/declare-api'
 import { validate } from '@/config/validator'
 import logo from '@/assets/img/logo.png'
 
@@ -198,7 +204,9 @@ export default {
         sbgjzdcb: `${EXCEL_SERVER_URL}/template/sbgjzdcb.docx`,
         sbgcngh: `${EXCEL_SERVER_URL}/template/sbgcngh.docx`
       },
-      logo
+      logo,
+      isEdit: false,
+      title: ['省级服务中心注册', '省级服务中心基本信息修改']
     }
   },
   computed: {},
@@ -248,6 +256,46 @@ export default {
       // const res = await this.$http.get(`${DECLARE_GET_VALIDATECODE}addDeclarer/${this.cellphone}`)
       getValidatecode('regiset', this.cellphone)
     },
+    // 初始化获取详细数据
+    init (id) {
+      getOrganizProvenceId(id).then(res => {
+        this.charger_name = res.chargerName // 负责人
+        this.company_name = res.companyName // 公司
+        this.cellphone = res.cellphone // 手机
+        this.idNumber = res.idNumber // 身份证
+        this.idFrontUrl = res.idFrontUrl // 身份证正面
+        this.idBackUrl = res.idBackUrl // 省份证反面
+        this.chargerInvestigationUrl = res.chargerInvestigationUrl // 负责人职责调查
+        this.companyInvestigationUrl = res.companyInvestigationUrl // 单位职责调查
+        this.promiseLetterUrl = res.promiseLetterUrl // 承诺公函
+        this.applyLetterUrl = res.applyLetterUrl // 申请公函
+        this.areaCode = res.areaCode // 地区
+        this.address = res.address // 地址
+      })
+    },
+    // 省级修改
+    @validate()
+    edit () {
+      const obj = {}
+      const id = window.sessionStorage.getItem('provience_id')
+      obj.chargerName = this.charger_name // 负责人
+      obj.companyName = this.company_name
+      obj.cellphone = this.cellphone // 手机
+      obj.idNumber = this.idNumber // 身份证
+      obj.idFrontUrl = this.idFrontUrl // 身份证正面
+      obj.idBackUrl = this.idBackUrl // 省份证反面
+      obj.chargerInvestigationUrl = this.chargerInvestigationUrl // 负责人职责调查
+      obj.companyInvestigationUrl = this.companyInvestigationUrl // 单位职责调查
+      obj.promiseLetterUrl = this.promiseLetterUrl // 承诺公函
+      obj.applyLetterUrl = this.applyLetterUrl // 申请公函
+      obj.areaCode = this.areaCode // 地区
+      obj.address = this.address // 地址
+      putOrganizProvenceId(id, obj).then(res => {
+        if (res.success) {
+          this.$router.push('/organiz/provence/message')
+        }
+      })
+    },
     @validate()
     submit () {
       const obj = {}
@@ -271,7 +319,6 @@ export default {
         this.infoTimer = setTimeout(() => { this.errMsg = [] }, 3000)
         return
       }
-      this.isShowSubmit = !this.isShowSubmit
       // const res = await this.$http.post(DECLARE_POST_DECLARER, obj)
       postPublicsProvenceRegister(obj).then((res) => {
         sessionStorage.setItem('title', '添加省级服务中心')
@@ -281,10 +328,14 @@ export default {
         sessionStorage.setItem('alink', '/officer/entry')
         sessionStorage.setItem('blink', '/officer/list')
         sessionStorage.setItem('clink', '')
-        this.$router.push('/message')
+        if (res.success) {
+          this.$router.push('/organiz/provence/message')
+        } else {
+          this.errMsg.push('注册失败')
+        }
       }).catch((err) => {
         if (err) {
-          this.isShowSubmit = !this.isShowSubmit
+          console.log(err)
         }
       })
     }
@@ -293,7 +344,8 @@ export default {
   components: {
     'v-multiple-upload': multipleUpload,
     'v-error-info': errInfo,
-    'v-area': area
+    'v-area': area,
+    'v-img': () => import('@/components/img/img')
   },
   beforeCreate () {
   },
@@ -302,6 +354,11 @@ export default {
   beforeMount () {
   },
   mounted () {
+    if (this.$route.path.split('/').indexOf('edit') > -1) {
+      const id = window.sessionStorage.getItem('provience_id')
+      this.isEdit = true
+      this.init(id)
+    }
   },
   beforeUpdate () {
   },

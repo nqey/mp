@@ -30,14 +30,14 @@
                 <th>序号</th>
                 <th>姓名</th>
                 <th>联系方式</th>
-                <th>所属机构</th>
+                <th>所属服务处</th>
                 <th>机构联系方式</th>
                 <th>地址</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, i) of resData" :key="i">
-                <th>{{item.id}}</th>
+                <th>{{item.sn}}</th>
                 <td>{{item.name}}</td>
                 <td>{{item.cellphone}}</td>
                 <td>{{item.organizName}}</td>
@@ -51,15 +51,17 @@
               <tr>
                 <th>序号</th>
                 <th>公司</th>
+                <th>服务处名称</th>
                 <th>所属服务处</th>
                 <th>地址</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, i) of resData" :key="i">
-                <th>{{item.snId}}</th>
+                <th>{{item.sn}}</th>
                 <td>{{item.companyName}}</td>
                 <td>{{item.name}}</td>
+                 <td>{{item.provenceName}}</td>
                 <td>{{item.address}}</td>
               </tr>
             </tbody>
@@ -76,7 +78,7 @@
             </thead>
             <tbody>
               <tr v-for="(item, i) of resData" :key="i">
-                <th>{{item.id}}</th>
+                <th>{{item.sn}}</th>
                 <td>{{item.companyName}}</td>
                 <td>{{item.chargerName}}</td>
                 <td>{{item.area}}</td>

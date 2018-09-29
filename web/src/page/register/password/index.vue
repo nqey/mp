@@ -19,12 +19,12 @@
               <div class="jg">
                 <small>不能使用特殊字符，长度在8-10之间</small>
                 <label>输入密码：&#12288;&#12288;</label>
-                <input type="password" class="form-control input-w-250" v-model="params.password" val-required/>
+                <input type="password" class="form-control input-w-250" v-model="params.newPassword" val-required/>
               </div>
               <div class="jg">
                 <small>请再次输入密码</small>
                 <label>确认密码：&#12288;&#12288;</label>
-                <input type="password" class="form-control input-w-250" v-model="params.repassword" val-required/>
+                <input type="password" class="form-control input-w-250" v-model="params.confirmPassword" val-required/>
               </div>
               <div class="jg">
                 <label>验 证 码：&#12288;&#12288;</label>
@@ -56,8 +56,8 @@ export default {
     return {
       params: {
         cellphone: '',
-        password: '',
-        repassword: '',
+        newPassword: '',
+        confirmPassword: '',
         code: ''
       },
       show: false,

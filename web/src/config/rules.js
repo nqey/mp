@@ -19,13 +19,13 @@ export default {
     validator(el, value) {
       return (value || '').trim().length > 0;
     },
-    message: (el) => '此项必填',
+    message: () => '此项必填',
   },
   'val-number': {
-    validator(el) {
-      return numberReg.test(el.value);
+    validator(el, value) {
+      return numberReg.test(value);
     },
-    message: (el) => '请输入整数！！！',
+    message: () => '请输入整数！！！',
   },
   'val-max-length': {
     validator(el, value) {
@@ -38,10 +38,10 @@ export default {
 
       return len <= maxLength;
     },
-    message: (el, attr) => `长度不能超过${el.getAttribute('val-max-length')}个字符`,
+    message: (el) => `长度不能超过${el.getAttribute('val-max-length')}个字符`,
   },
   'val-min-length': {
-    validator(el, b) {
+    validator(el, value) {
       const len = (value || '').trim().length;
       const maxLength = +el.getAttribute('val-min-length');
       if (maxLength < 0 || isNaN(maxLength)) {
@@ -53,38 +53,38 @@ export default {
     message: el => `长度不能少于${el.getAttribute('val-min-length')}个字符`,
   },
   'val-email': {
-    validator(el) {
-      return emailReg.test(el.value);
+    validator(el, value) {
+      return emailReg.test(value);
     },
     message: () => '请输入正确的邮箱',
   },
   'val-url': {
-    validator(el) {
-      return urlReg.test(el.value);
+    validator(el, value) {
+      return urlReg.test(value);
     },
     message: () => '请输入正确的路径',
   },
   'val-cellphone': {
-    validator(el) {
-      return cellphoneReg.test(el.value);
+    validator(el, value) {
+      return cellphoneReg.test(value);
     },
     message: () => '请输入正确的手机号码',
   },
   'val-password': {
-    validator(el) {
-      return passwordReg.test(el.value);
+    validator(el, value) {
+      return passwordReg.test(value);
     },
     message: () => '密码过于简单，必须包含字母、数字、长度在6-20位',
   },
   'val-id-card': {
-    validator(el) {
-      return idCardReg.test(el.value);
+    validator(el, value) {
+      return idCardReg.test(value);
     },
     message: () => '身份证输入不正确',
   },
   'val-time': {
-    validator(el) {
-      return timeReg.test(el.value);
+    validator(el, value) {
+      return timeReg.test(value);
     },
     message: () => '不是一个正常的时间',
   },

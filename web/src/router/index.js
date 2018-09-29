@@ -248,6 +248,24 @@ const router = new Router({
         keepAlive: false,
         menu: false
       }
+    },
+    { // 省级服务中心---审核提示 9-28 zsp
+      path: '/organiz/provence/message',
+      name: 'organizMessage',
+      component: r => require.ensure([], require => r(require('@/page/organiz/message')), 'organizMessage'),
+      meta: {
+        keepAlive: false,
+        menu: false
+      }
+    },
+    { // 省级服务中心---修改 9-27 zsp
+      path: '/organiz/provence/edit',
+      name: 'organizProvenceEdit',
+      component: r => require.ensure([], require => r(require('@/page/organiz/provence')), 'organizProvenceEdit'),
+      meta: {
+        keepAlive: false,
+        menu: false
+      }
     }
   ]
 })

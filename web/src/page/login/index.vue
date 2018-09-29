@@ -38,7 +38,7 @@
               <li>
                 <ul class="logo_yzm">
                   <li>
-                    <input class="input" type="text" name="checknumber" placeholder="请输入验证码"  v-model="form.checknumber">
+                    <input class="input" type="text" name="checknumber" placeholder="请输入验证码"  v-model="form.checknumber" val-required>
                   </li>
                   <li class="verifycode-wrapper">
                     <img id="imgVerify" :src="verificationCode" alt="点击更换验证码" width="112" height="45" @click="verificationCodeFn">
@@ -190,8 +190,24 @@ export default {
       window.sessionStorage.setItem('type', d.type)
       window.sessionStorage.setItem('state', d.state)
       window.sessionStorage.setItem('recommendId', d.cellphone)
+      window.sessionStorage.setItem('provience_id', d.id)
       setCookie('sb_token', d.token, 1000 * 60)
-      this.$router.push(router[d.state] || router.default)
+      if (d.type === 3) {
+        switch (d.state) {
+          case 'passed':
+            this.$router.push(router.default)
+            break
+          case 'unpass':
+            this.$router.push('/organiz/provence/edit')
+            break
+          default:
+            this.$router.push('/organiz/provence/message')
+            // // '/organiz/provence/edit', {name: 1231}
+            // this.$router.push('/organiz/provence/edit')
+        }
+      } else {
+        this.$router.push(router[d.state] || router.default)
+      }
     }
   },
   watch: {},
@@ -220,5 +236,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style type="text/css" lang="scss" scoped>
-  @import 'index.scss'
+  @import 'index.scss';
 </style>

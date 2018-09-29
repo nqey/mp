@@ -136,7 +136,7 @@ export const registInfo = async (params) => {
  * @returns 获取负责区域名额
  */
 export const getArealimitAreacode = async (areaCode) => {
-  const res = await xhr.get(`${DECLARE_BASE_URL}organiz/arealimit`, {
+  const res = await xhr.get(`${DECLARE_BASE_URL}publics/arealimit`, {
     params: {
       areaCode
     }
@@ -365,6 +365,26 @@ export const getOrganizDeclarerDetails = async (id) => {
  */
 export const postPublicsProvenceRegister = async (params) => {
   const res = await xhr.post(`${DECLARE_BASE_URL}publics/provence/register`, params)
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author zsp
+ * @returns 省级服务中心详情
+ */
+export const getOrganizProvenceId = async (id) => {
+  const res = await xhr.get(`${DECLARE_BASE_URL}organiz/provence/${id}`)
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}
+
+/**
+ * @author zsp
+ * @returns 省级服务中心修改
+ */
+export const putOrganizProvenceId = async (id, params) => {
+  const res = await xhr.put(`${DECLARE_BASE_URL}organiz/provence/${id}`, params)
   if (!res.data.success) msg.error(res.data.message)
   return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }

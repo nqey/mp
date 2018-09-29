@@ -22,14 +22,11 @@ const setMessager = (element, pass, notice) => {
   // let kls = pass ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove';
 
   // 新建一个提示的node
-  const newItem = document.createElement('span');
+  const newItem = document.createElement('div');
   newItem.className = `${_VALIDATOR_FLAG_}`;
-  newItem.style.color = color;
-  newItem.style['position'] = 'absolute';
-  newItem.style['right'] = '60px';
   const textnode = document.createTextNode(pass ? '' : notice);
   newItem.appendChild(textnode);
-
+  newItem.setAttribute(element.attributes[0].name, '')
   // 插入到element的后面
   const parent = element.parentNode;
   if (parent.lastChild === element) {
@@ -78,7 +75,7 @@ const doValidate = (element, value) => {
     const rule = rules[key];
     if (element.hasAttribute(`${key}`)) {
       has = true;
-      element.style.display = 'inline';
+      // element.style.display = 'inline';
       pass = rule.validator(element, value);
       notice = rule.message(element, value);
       if (!pass) {
@@ -111,6 +108,9 @@ const VALIDATE_ROUTER = {
   TEXTAREA(dom) {
     doValidate(dom, dom.value);
   },
+  DIV(dom) {
+    doValidate(dom, dom.getAttribute('val-value'));
+  },
 }
 
 let inited = false;
@@ -120,7 +120,6 @@ let inited = false;
     return;
   }
   inited = true;
-
   // 给input、textarea类型绑定blur事件
   document.addEventListener('blur', (e) => VALIDATE_ROUTER.decisior(e.target), true);
 
@@ -157,12 +156,6 @@ export const validate = function() {
     descriptor.value = descriptor.value.before(function() {
       // 在提交之前验证
       const parent = this.$el;
-      // 是否存在验证未通过的
-      let invalidated = parent.getElementsByClassName(_VALIDATE_FAILED_FLAG_);
-      if (invalidated.length > 0) {
-        scrollToDom(invalidated[0]);
-        return false;
-      }
 
       // 包含rules中的属性，如required 应该打上 val-required 标签
       [...parent.querySelectorAll(Object.keys(rules).map(k => `[${k}]`).join(','))]
@@ -172,7 +165,7 @@ export const validate = function() {
         })
 
       // 是否存在验证未通过的
-      invalidated = parent.getElementsByClassName(_VALIDATE_FAILED_FLAG_);
+       let invalidated = parent.getElementsByClassName(_VALIDATE_FAILED_FLAG_);
       if (invalidated.length > 0) {
         scrollToDom(invalidated[0]);
         return false;

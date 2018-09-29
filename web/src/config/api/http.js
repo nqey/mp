@@ -25,7 +25,7 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use((response) => {
   // 判断http状态码
-  if (!(response && [200, 304, 400].indexOf(response.status) > -1)) Message.error('网络异常')
+  if ([200, 304, 400].indexOf(response.status) === -1) Message.error('网络异常')
   return response
 }, error => Promise.reject(error))
 

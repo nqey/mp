@@ -10,13 +10,13 @@
           <div class="form-group">
             <label  class="col-sm-4 control-label">姓 名：</label>
             <div class="col-sm-3">
-              <input type="email" class="form-control" placeholder="请输入姓名" v-model="name">
+              <input type="email" class="form-control" placeholder="请输入姓名" v-model="name" val-required>
             </div>
           </div>
           <div class="form-group">
             <label  class="col-sm-4 control-label">身份证号码：</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" placeholder="请输入身份证号码" v-model="idNumber">
+              <input type="text" class="form-control" placeholder="请输入身份证号码" v-model="idNumber" val-required>
             </div>
           </div>
           <div class="form-group">
@@ -27,10 +27,10 @@
               <small class="callout-red label_height">请上传本人真实身份证，否则审核不通过。</small>
               <div class="clearfix"></div>
               <div class="pull-left" style="width: 200px;margin-right: 30px;">
-                <v-multiple-upload len="1" :imgSrc="initFrontUrl" uploadid="upload2" title="上传正面" @acceptData="frontUrl"></v-multiple-upload>
+                <v-multiple-upload len="1" :imgSrc="initFrontUrl" uploadid="upload2" title="上传正面" @acceptData="frontUrl" val-required :val-value="idFrontUrl"/>
               </div>
               <div class="pull-left" style="width: 200px;">
-                <v-multiple-upload len="1" :imgSrc="initBackUrl" uploadid="upload3" title="上传背面" @acceptData="backUrl"></v-multiple-upload>
+                <v-multiple-upload len="1" :imgSrc="initBackUrl" uploadid="upload3" title="上传背面" @acceptData="backUrl" val-required :val-value="idBackUrl"/>
               </div>
             </div>
           </div>
@@ -45,13 +45,13 @@
             <label  class="col-sm-4 control-label">选择申请区域：</label>
             <div class="col-sm-5">
               <span class="label_height" v-show="$route.params.type === '2'">{{ organizAddress }}</span>
-              <v-area v-show="$route.params.type === '1'" @acceptData="setApplyAddress" type="2"></v-area>&#12288;
+              <v-area v-show="$route.params.type === '1'" @acceptData="setApplyAddress" type="2" :disabled="disabled"></v-area>&#12288;
             </div>
           </div>
           <div class="form-group">
             <label  class="col-sm-4 control-label">推荐人工号：</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" placeholder="推荐人工号" v-model="recommendOrgnizPhone">
+              <input type="text" class="form-control" placeholder="推荐人工号" v-model="recommend">
             </div>
           </div>
           <div class="form-group">
@@ -66,8 +66,7 @@
           <div class="form-group">
             <label  class="col-sm-4 control-label"></label>
             <div class="col-sm-5">
-              <button v-show="isShowSubmit" type="button" class="btn btn-success" style="height: 35px;" @click="submit">提交</button>
-              <button v-show="!isShowSubmit" type="button" class="btn btn-success" style="height: 35px;" disabled>提交</button>
+              <button type="button" class="btn btn-success" style="height: 35px;" @click="submit" :disabled="isShowSubmit">提交</button>
             </div>
           </div>
         </div>
@@ -81,6 +80,7 @@ import multipleUpload from '@/components/upload/multiple'
 import area from '@/components/area/area'
 import registerHead from '@/components/header/register'
 import { putBaseinfo, getBaseinfo } from '@/config/api/declare-api'
+import { validate } from '@/config/validator'
 
 export default {
   name: 'step2',
@@ -97,11 +97,12 @@ export default {
       address: '',
       liveAddress: '',
       applyAddress: '',
-      recommendOrgnizPhone: '',
       enterpriseName: '',
       organizAddress: '',
       areacode: '',
-      isShowSubmit: true,
+      isShowSubmit: false,
+      recommend: '',
+      disabled: false,
       list: [],
       reason: null
     }
@@ -124,19 +125,20 @@ export default {
     setApplyAddress (d) {
       this.applyAddress = d
     },
+    @validate()
     submit () {
       const param = {}
       param.name = this.name
       param.idNumber = this.idNumber
       param.idFrontUrl = this.idFrontUrl
       param.idBackUrl = this.idBackUrl
-      param.recommendOrgnizPhone = this.recommendOrgnizPhone || null
-      param.enterpriseName = this.enterpriseName
+      param.companyName = this.enterpriseName
       param.liveAddress = this.liveAddress
       param.address = this.address
       if (this.$route.params.type === '1') {
         param.applyAddress = this.applyAddress
       }
+      param.recommend = this.recommend
       this.isShowSubmit = true
       putBaseinfo(param).then(() => this.$router.push('/step3')).catch(() => {
         this.isShowSubmit = false
@@ -164,6 +166,7 @@ export default {
       this.organizAddress = d.organizAddress
       this.areacode = `${d.liveProvice},${d.liveCity},${d.liveDistrict}`
       this.reason = d.reason
+      this.disabled = true
     })
   }
 }
