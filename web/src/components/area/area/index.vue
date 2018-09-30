@@ -47,9 +47,6 @@ export default {
       rmplaces: 0
     }
   },
-  watch: {
-    areacode: 'getAreaTree'
-  },
   components: {},
   methods: {
     init () {

@@ -3,10 +3,13 @@
     <v-register-head :step="2"></v-register-head>
     <div class="step_more ">
       <div class="step_chunk ">
-        <div v-if="reason" style="text-align: center;color: red;">
-          <span class="glyphicon glyphicon-exclamation-sign"></span> <span style="position: relative;top:-1px;">{{reason}}</span>
-        </div>
         <div class="form-horizontal">
+          <div class="form-group" v-if="reason">
+            <label  class="col-sm-4 control-label"></label>
+            <div class="col-sm-3 text-center" style="color: red;">
+              <span class="glyphicon glyphicon-exclamation-sign"></span> <span style="position: relative;top:-1px;">{{reason}}</span>
+            </div>
+          </div>
           <div class="form-group">
             <label  class="col-sm-4 control-label">姓 名：</label>
             <div class="col-sm-3">
@@ -44,8 +47,7 @@
           <div class="form-group">
             <label  class="col-sm-4 control-label">选择申请区域：</label>
             <div class="col-sm-5">
-              <span class="label_height" v-show="$route.params.type === '2'">{{ organizAddress }}</span>
-              <v-area v-show="$route.params.type === '1'" @acceptData="setApplyAddress" type="2" :disabled="disabled"></v-area>&#12288;
+              <v-area :areacode="areacode" @acceptData="setApplyAddress" type="2" :disabled="disabled"></v-area>&#12288;
             </div>
           </div>
           <div class="form-group">
@@ -57,7 +59,7 @@
           <div class="form-group">
             <label  class="col-sm-4 control-label">企业全称：</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" placeholder="请输入您的企业主体全称；例如：四川中新华搜信息技术有限公司；" v-model="enterpriseName">
+              <input type="text" class="form-control" placeholder="请输入您的企业主体全称；例如：四川中新华搜信息技术有限公司；" v-model="companyName">
               <br/>
               <br/>
               <small style="color: #999">申请申报服务处必须是以公司的名义进行申请，拒绝个人申请。</small>
@@ -97,7 +99,7 @@ export default {
       address: '',
       liveAddress: '',
       applyAddress: '',
-      enterpriseName: '',
+      companyName: '',
       organizAddress: '',
       areacode: '',
       isShowSubmit: false,
@@ -132,7 +134,7 @@ export default {
       param.idNumber = this.idNumber
       param.idFrontUrl = this.idFrontUrl
       param.idBackUrl = this.idBackUrl
-      param.companyName = this.enterpriseName
+      param.companyName = this.companyName
       param.liveAddress = this.liveAddress
       param.address = this.address
       if (this.$route.params.type === '1') {
@@ -159,12 +161,13 @@ export default {
       this.recommendName = d.recommentName
       this.recommendOrgnizId = d.recommendOrgnizId
       this.recommendOrgnizType = d.recommendOrgnizType
-      this.enterpriseName = d.organizName
+      this.companyName = d.companyName
       this.liveAddress = d.liveAddress
       this.address = d.address
       this.applyAddress = d.applyAddress
       this.organizAddress = d.organizAddress
       this.areacode = `${d.liveProvice},${d.liveCity},${d.liveDistrict}`
+      this.applycode = `${d.applyProvice},${d.applyCity},${d.applyDistrict}`
       this.reason = d.reason
       this.disabled = true
     })

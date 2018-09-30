@@ -49,20 +49,27 @@ export default {
       isStep5: false
     }
   },
+  watch: {
+    step: 'init'
+  },
   components: {},
-  methods: {},
-  mounted () {
-    if (this.step === 1) {
-      this.isStep1 = true
-    } else if (this.step === 2) {
-      this.isStep2 = true
-    } else if (this.step === 3) {
-      this.isStep3 = true
-    } else if (this.step === 4) {
-      this.isStep4 = true
-    } else if (this.step === 5) {
-      this.isStep5 = true
+  methods: {
+    init () {
+      if (this.step === 1) {
+        this.isStep1 = true
+      } else if (this.step === 2) {
+        this.isStep2 = true
+      } else if (this.step === 3) {
+        this.isStep3 = true
+      } else if (this.step === 4) {
+        this.isStep4 = true
+      } else if (this.step === 5) {
+        this.isStep5 = true
+      }
     }
+  },
+  mounted () {
+    this.init()
   }
 }
 </script>

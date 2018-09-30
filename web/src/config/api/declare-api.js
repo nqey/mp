@@ -388,3 +388,13 @@ export const putOrganizProvenceId = async (id, params) => {
   if (!res.data.success) msg.error(res.data.message)
   return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
 }
+
+/**
+ * @author 秦超
+ * @returns 测试代理
+ */
+export const testProxy = async () => {
+  const res = await xhr.get('/api/organiz/provence/34')
+  if (!res.data.success) msg.error(res.data.message)
+  return res.data.success ? res.data.data : Promise.reject(new Error(res.data.message))
+}

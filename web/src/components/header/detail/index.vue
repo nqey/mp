@@ -71,6 +71,9 @@ export default {
     return {
       logo
     }
+  },
+  mounted () {
+    document.documentElement.scrollTop = 0
   }
 }
 </script>

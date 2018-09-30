@@ -202,8 +202,6 @@ export default {
             break
           default:
             this.$router.push('/organiz/provence/message')
-            // // '/organiz/provence/edit', {name: 1231}
-            // this.$router.push('/organiz/provence/edit')
         }
       } else {
         this.$router.push(router[d.state] || router.default)

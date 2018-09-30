@@ -11,13 +11,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/agents': {
-      //   target: '192.168.1.226:3001',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/agents' : '/'
-      //   }
-      // }
+      '/api': {
+        target: 'http://192.168.1.16:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api' : ''
+        },
+        cookieDomainRewrite: '.cpsdb61.com'
+      }
     },
 
     // Various Dev Server settings

@@ -12,7 +12,7 @@
           <h4>基本信息审核中...</h4>
           <br/>
           <br/>
-          <p style="font-size:16px; line-height: 35px;">审核时间大概在1-2个工作日，请耐心等待。等待过程中你可以登陆账号查看审核结果</p>
+          <p style="font-size:16px; line-height: 35px;">审核时间大概在1-2个工作日，请耐心等待。等待过程中你可以登录账号查看审核结果</p>
           <p style="margin-bottom: 80px; font-size:16px;line-height: 35px;">审核最终结果也会以短信方式发送至您注册的手机号码中，请留意查阅。</p>
         </div>
       </div>

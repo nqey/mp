@@ -54,7 +54,7 @@
 
 <script>
 import { getValidatecode } from '@/config/api/base-api'
-import { postOrganiz } from '@/config/api/declare-api'
+import { postOrganiz, testProxy } from '@/config/api/declare-api'
 import { validate } from '@/config/validator'
 import { setCookie } from '@/config/cookie'
 
@@ -108,6 +108,9 @@ export default {
         this.isShowSubmit = false
       })
     }
+  },
+  mounted () {
+    testProxy()
   }
 }
 </script>

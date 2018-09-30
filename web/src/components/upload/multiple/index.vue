@@ -92,6 +92,9 @@ export default {
   },
   components: {
     'v-big-img': vBigImg
+  },
+  mounted () {
+    this.setImgSrc()
   }
 }
 </script>
