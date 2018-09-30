@@ -272,7 +272,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const isLogin = !!getCookie('sb_token')
-  if (!to.meta.munu) {
+  if (!to.meta.menu) {
     next()
   } else if (to.path !== '/login' && !isLogin) {
     next({ path: '/login' })
